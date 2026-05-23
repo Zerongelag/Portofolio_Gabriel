@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Gabriel Louis Hartanto</title>
+
+    <style>
+        /* ============================================
+           🎨 COLOR HUNT PALETTE & GLOBAL VARIABLES
+           ============================================ */
+        :root {
+            --bg: #4a4466;            /* Deep slate purple */
+            --bg-card: #6eadbc;       /* Ocean blue */
+            --primary: #9fcbad;       /* Soft sage green */
+            --border-blue: #1f243a;   /* Solid Dark Blue for crisp outlines */
+            --text-heading: #f3f7e2;  /* Creamy white */
+            --text-body: #f3f7e2;     /* Creamy white */
+            --text-dark: #332f47;     /* Dark purple-gray */
+            --radius: 16px;           
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(var(--border-blue) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            color: var(--text-body);
+            line-height: 1.6;
+            padding-bottom: 3rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           🧭 NAVIGATION BAR
+           ============================================ */
+        nav {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 4px solid var(--border-blue);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        nav .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        nav .logo:hover {
+            color: var(--primary);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 0.75rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-heading);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        nav .nav-links a:hover {
+            background-color: var(--primary); 
+            color: var(--text-dark);
+            border-color: var(--border-blue);
+            box-shadow: 2px 2px 0px var(--border-blue);
+        }
+
+        /* ============================================
+           📦 LAYOUT CONTAINERS
+           ============================================ */
+        .page-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        section h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            height: 6px;
+            width: 100%;
+            background-color: var(--primary); 
+            border: 2px solid var(--border-blue);
+            border-radius: 4px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* ============================================
+           🦸 HERO HEADER & PROFILE IMAGE
+           ============================================ */
+        .hero {
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 0.25rem;
+            line-height: 1.1;
+        }
+
+        .hero-text .highlight {
+            color: var(--primary);
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin-bottom: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 540px;
+        }
+
+        /* Optimized & enlarged profile image frame */
+        .hero-avatar-container {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%; 
+            background-color: var(--primary);
+            border: 5px solid var(--border-blue); 
+            box-shadow: 8px 8px 0px var(--border-blue);
+            transform: rotate(-3deg);
+            transition: var(--transition);
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-avatar-container:hover {
+            transform: rotate(3deg) scale(1.05);
+        }
+
+        /* ============================================
+           🛠️ INTERACTIVE UI BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            background-color: var(--primary);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 800;
+            font-size: 1.05rem;
+            border: 3px solid var(--border-blue); 
+            transition: var(--transition);
+            box-shadow: 4px 4px 0px var(--border-blue);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 7px 7px 0px var(--border-blue);
+            background-color: var(--text-heading);
+        }
+
+        /* ============================================
+           🖼️ CARD SYSTEM
+           ============================================ */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 3px solid var(--border-blue); 
+            box-shadow: 5px 5px 0px var(--border-blue);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 9px 9px 0px var(--border-blue);
+            background-color: #79b7c6; 
+        }
+
+        .card h3 {
+            margin-bottom: 0.75rem;
+            color: var(--text-heading);
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .card p {
+            color: #f8f9fa;
+            font-size: 1.025rem;
+            opacity: 0.95;
+        }
+
+        .card-body {
+            border-top: 2px dashed rgba(31, 36, 58, 0.25); 
+            padding-top: 1rem;
+            margin-top: auto; 
+        }
+
+        /* ============================================
+           📸 HOBBY IMAGE CONTAINERS
+           ============================================ */
+        .hobby-image-container {
+            width: 100%;
+            height: 180px;
+            background-color: var(--bg); 
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--border-blue); 
+        }
+
+        .hobby-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            transition: var(--transition);
+        }
+
+        .card:hover .hobby-image-container img {
+            transform: scale(1.06);
+        }
+
+        .card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        /* ============================================
+           ⏳ TIMELINE LAYOUT RULES
+           ============================================ */
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-badge {
+            font-size: 2rem;
+            background: var(--primary);
+            border: 2px solid var(--border-blue);
+            border-radius: 12px;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 2px 2px 0px var(--border-blue);
+        }
+
+        /* ============================================
+           📬 CONTACT & FOOTER LAYOUTS
+           ============================================ */
+        .contact-container {
+            background-color: var(--bg-card);
+            padding: 4rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 3px solid var(--border-blue); 
+            box-shadow: 6px 6px 0px var(--border-blue);
+        }
+
+        .contact-container p {
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.15rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.05rem;
+            background: var(--primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            border: 3px solid var(--border-blue);
+            box-shadow: 3px 3px 0px var(--border-blue);
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            background-color: var(--text-heading);
+            transform: translateY(-3px);
+            box-shadow: 6px 6px 0px var(--border-blue);
+        }
+
+        .quotes-container {
+            margin-top: 5rem;
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 3px dashed var(--border-blue);
+        }
+
+        .quote-text {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-author {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.8;
+        }
+
+        /* ============================================
+           📱 RESPONSIVE MEDIA QUERIES
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 4rem 0;
+                gap: 2rem;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .hero-text p {
+                margin: 0 auto 2.5rem auto;
+            }
+            .hero-avatar-container {
+                width: 200px;
+                height: 200px;
+            }
+            nav .nav-inner {
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+            .about-split {
+                grid-template-columns: 1fr;
+            }
+            section {
+                padding: 3.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">Portfolio Gabriel Louis Hartanto</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#special">Why Me</a></li>
+                <li><a href="#experience">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-container">
+
+        <!--🦸 HERO SECTION -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Hi, I'm <span class="highlight">Louis</span></h1>
+                <p class="subtitle">A student with <b>BIG DREAMS</b></p>
+                <p>
+                    Welcome to my corner of the internet! A dude who loves exploring ideas, 
+                    learning new things, and experimenting with creative projects. I'm trying to improve every day with the hopes of one day bringing a positive impact for the world.
+                </p>
+                <a href="#hobbies" class="btn">Explore My World 👇</a>
+            </div>
+            <!-- Expanded Profile Photo Container -->
+            <div class="hero-avatar-container">
+                <img src="profile.jpg" alt="Gabriel Louis Hartanto Profile Picture">
+            </div>
+        </section>
+
+        <!--📋 ABOUT ME SECTION -->
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-split">
+                <div class="card">
+                    <h3>Who am I?</h3>
+                    <div class="card-body">
+                        <p>
+                            My name is Gabriel Louis Hartanto, a high school student at Wardaya High School.
+                            Unlike other people, instead of a boring resume full of test scores, I wanted to build something that 
+                            shows who I actually am. I might not have a stack of certificates, but I have an 
+                            infinite amount of curiosity and a love for learning and creating things. 
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>How I do things</h3>
+                    <div class="card-body">
+                        <p>
+                            I thrive on learning things by doing them, whether that's learning how to code a layout, or understanding 
+                            how digital design fits together. Slowly, day by day creating the best version of myself.
+                            In the hopes of one day I can achieve those only some people dream of and make projects that can change the world.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--📸 HOBBIES SECTION -->
+        <section id="hobbies">
+            <h2>My Creative Hobbies</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <div class="hobby-image-container">
+                        <img src="hobby1.jpg" alt="Sports">
+                    </div>
+                    <div>
+                        <h3>Sports ⚽</h3>
+                        <div class="card-body">
+                            <p>I love any type of sports, whether it's with a ball or even racket, I enjoy the thrill that it offers. The court is the only place where all my problems disappear</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="hobby-image-container">
+                        <img src="hobby2.jpg" alt="Traveling">
+                    </div>
+                    <div>
+                        <h3>Traveling 🚗</h3>
+                        <div class="card-body">
+                            <p>I like exploring, not just for knowledge but also the world. I enjoy visiting brand new places and viewing beautiful, unique sceneries.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="hobby-image-container">
+                        <img src="hobby3.jpg" alt="Drawing">
+                    </div>
+                    <div>
+                        <h3>Drawing 🎨</h3>
+                        <div class="card-body">
+                            <p>I like different types of self expressions, but art is my favorite by far. It allows me to express my feelings and creativity, while creating a beautiful piece.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--🎯 CORE STRENGTHS SECTION -->
+        <section id="special">
+            <h2>What Makes Me Special</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <span class="icon">🧠💪</span>
+                    <h3>Physically & Mentally Strong</h3>
+                    <div class="card-body">
+                        <p>
+                            I'm disciplined and resilient, bringing the physical stamina and mental focus necessary to tackle demanding tasks. 
+                            Capable of maintaining sharp attention to detail and consistent productivity under tight deadlines or high-pressure environments. 
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="icon">🎯🥇</span>
+                    <h3>Focus & Critical Thinking</h3>
+                    <div class="card-body">
+                        <p>
+                            I prefer clean, direct paths over overcomplicating things. I like finding the simplest 
+                            way to solve a problem effectively without getting bogged down by useless rules.
+                            Driven by a strong work ethic that ensures tasks are executed efficiently from start to finish.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="icon">🏆🧑</span>
+                    <h3>Composure & Confidence</h3>
+                    <div class="card-body">
+                        <p>
+                            I possess a calm, logical approach to high-stakes situations, ensuring that decision-making remains sharp.
+                            Excellent public speaking and presentation skills enable the clear delivery of project goals, technical details, and progress reports.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--🏆 ACHIEVEMENTS & EXPERIENCES SECTION -->
+        <section id="experience">
+            <h2>Achievements & Experience</h2>
+            <div class="card">
+                <div class="timeline-item">
+                    <div class="timeline-badge">🥇</div>
+                    <div class="timeline-content">
+                        <h3>Academic & Talents Milestones</h3>
+                        <ul style="list-style-type: disc; margin-left: 1.25rem; margin-top: 0.5rem;">
+                            <li>Ranked 1st in class consistently throughout Junior High School.</li>
+                            <li>Awarded Best Leader and recognized as the most active participant in school events.</li>
+                            <li>Named Best Futsal Player on the team across a school tournament.</li>
+                            <li>Active competitor in diverse fields, including creative video production, art competitions, and sports cups.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-badge">💻</div>
+                    <div class="timeline-content">
+                        <h3>Leadership & Community Experience</h3>
+                        <ul style="list-style-type: disc; margin-left: 1.25rem; margin-top: 0.5rem;">
+                            <li>Served as an active member of the Student Council throughout Junior High School.</li>
+                            <li>Project Lead for major school sporting tournaments and events.</li>
+                            <li>Dedicated student volunteer, teaching Mathematics and English to younger children.</li>
+                            <li>Core committee member for school-wide academic competitions and religious activities.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--📬 CONTACT SECTION -->
+        <section id="contact">
+            <div class="contact-container">
+                <h2>Let's Connect!</h2>
+                <p>
+                    I'm always looking to meet cool people, collaborate on small projects, or if you want to give me feedback. 
+                    Feel free to send me a hi!
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com" class="contact-link">📧 Email Me</a>
+                    <a href="#" class="contact-link">🐙 GitHub</a>
+                    <a href="#" class="contact-link">💬 Discord</a>
+                </div>
+            </div>
+        </section>
+
+        <!--📝 FOOTER -->
+        <div class="quotes-container">
+            <p class="quote-text">"The only way to do great work is to love what you do."</p>
+            <p class="quote-author">— Steve Jobs</p>
+        </div>
+
+    </div> 
+</body>
+</html>
